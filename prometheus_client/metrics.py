@@ -138,6 +138,7 @@ class MetricWrapperBase(Collector):
         self._kwargs: Dict[str, Any] = {}
         self._documentation = documentation
         self._unit = unit
+        self._registry = registry
 
         if not METRIC_NAME_RE.match(self._name):
             raise ValueError('Invalid metric name: ' + self._name)
@@ -206,6 +207,7 @@ class MetricWrapperBase(Collector):
                     labelnames=self._labelnames,
                     unit=self._unit,
                     _labelvalues=labelvalues,
+                    registry=self._registry,
                     **self._kwargs
                 )
             return self._metrics[labelvalues]
